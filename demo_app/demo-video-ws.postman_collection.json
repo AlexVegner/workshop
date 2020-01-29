@@ -1,0 +1,195 @@
+{
+	"variables": [],
+	"info": {
+		"name": "demo-video-ws",
+		"_postman_id": "ff2bf67a-4035-e9eb-af4d-d0d5be6605c6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "videos",
+			"description": "",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"url": "{{baseUrl}}/video-ws/videos",
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{testToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"url": "{{baseUrl}}/video-ws/videos/1123wqw1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{testToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"url": "{{baseUrl}}/video-ws/videos/8a178090-caf2-4f9e-af16-ee577bf8cf77",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{testToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"url": "{{baseUrl}}/video-ws/videos/1123wqw1",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{testToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": \"1123wqw1\",\n        \"title\": \"\",\n        \"year\": \"1998\",\n        \"poster\": \"https://m.media-amazon.com/images/M/MV5BMTM5NzcwMzEwOF5BMl5BanBnXkFtZTcwNjg5MTgwMw@@._V1_SX300.jpg\",\n        \"label\": \"www\",\n        \"priority\": 5,\n        \"viewed\": false,\n        \"rating\": 0,\n        \"timestamp\": 1575473859\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"url": "{{baseUrl}}/video-ws/videos",
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{testToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"2\",\n  \"label\": \"my film\",\n  \"priority\": 1,\n  \"viewed\": false,\n  \"rating\": 10, \n  \"timestamp\": 1575473859,\n  \"title\": \"Robin Hood\",\n  \"year\": \"2010\",\n  \"poster\": \"https://m.media-amazon.com/images/M/MV5BMTM5NzcwMzEwOF5BMl5BanBnXkFtZTcwNjg5MTgwMw@@._V1_SX300.jpg\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "recommended",
+					"request": {
+						"url": "{{baseUrl}}/video-ws/recommended",
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{testToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ping",
+			"description": "",
+			"item": [
+				{
+					"name": "ping",
+					"request": {
+						"url": "{{baseUrl}}/video-ws/videos",
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{testToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
