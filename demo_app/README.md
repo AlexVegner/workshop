@@ -5,13 +5,13 @@ Demo video app
 ## Getting Started
 
 ####  1. Create flutter app
-    ```
-    flutter create demo_app
-    ```
+```
+flutter create demo_app
+```
 
 #### 2. Create public Github repository
 
-####  3. Send link to your repository via email: <dpolish@aux.dkatalis.com> and <ovegn@aux.dkatalis.com>
+#### 3. Send link to your repository via email: <dpolish@aux.dkatalis.com> and <ovegn@aux.dkatalis.com>
 
 [Send email](mailto:dpolish@aux.dkatalis.com;ovegn@aux.dkatalis.com)
 
@@ -132,7 +132,7 @@ Demo video app
 
 * `GET /videos/<video id>`
 
-headers:
+    headers:
     ```
     "Authorization": "2" - or any other string
     "Content-Type": "application/json"
