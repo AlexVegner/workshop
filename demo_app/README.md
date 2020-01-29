@@ -137,6 +137,7 @@ flutter create demo_app
     "Authorization": "2" - or any other string
     "Content-Type": "application/json"
     ```
+    
     response:
     ```json
     {
