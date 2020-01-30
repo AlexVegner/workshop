@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "dart_isolates"
+		},
+		{
+			"path": "demo_app"
 		}
 	],
 	"settings": {}
