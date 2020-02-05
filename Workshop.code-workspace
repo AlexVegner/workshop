@@ -11,6 +11,12 @@
 		},
 		{
 			"path": "demo_app"
+		},
+		{
+			"path": "storage"
+		},
+		{
+			"path": "home_navigation"
 		}
 	],
 	"settings": {}
