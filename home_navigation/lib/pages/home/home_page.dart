@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:home_navigation/pages/dashboard/dashboard_page.dart';
 import 'package:home_navigation/pages/favorite_video_list/favorite_video_list_page.dart';
@@ -44,39 +43,42 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  BottomNavigationBar _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            title: Text('Dashboard'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text('Search'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            title: Text('Favorite'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            title: Text('Settings'),
+          ),
+        ],
+        currentIndex: _selectedPageIndex,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Theme.of(context).primaryColor,
+        onTap: _onItemSelected,
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
       ),
       body: _pages[_selectedPageIndex],
       drawer: HomeDrawer(callback: _onItemSelected),
-      bottomNavigationBar: BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.dashboard),
-          title: Text('Dashboard'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          title: Text('Search'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          title: Text('Favorite'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          title: Text('Settings'),
-        ),
-      ],
-      currentIndex: _selectedPageIndex,
-      unselectedItemColor: Colors.grey,
-      selectedItemColor: Theme.of(context).primaryColor,
-      onTap: _onItemSelected,
-    ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 }

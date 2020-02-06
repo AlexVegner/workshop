@@ -17,6 +17,8 @@ abstract class Router {
     Routes.settings: (BuildContext context) => HomePage(page: HomePageOptions.settings,),
   };
 
+  ///   settings/profile/edit/?title=Matrix&year=2010
+
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     final List<String> pathElements = settings.name.split('/');
     if (pathElements[0] != '') {
