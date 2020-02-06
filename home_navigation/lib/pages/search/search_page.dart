@@ -24,10 +24,10 @@ class _SearchPageState extends State<SearchPage> {
             const SizedBox(
               height: 20,
             ),
-            RaisedButton(
-              child: Text('Details'),
-              onPressed: _showFavoriteDetailsPage,
-            )
+            // RaisedButton(
+            //   child: Text('Details'),
+            //   onPressed: _showFavoriteDetailsPage,
+            // )
           ],
         ),
       ),

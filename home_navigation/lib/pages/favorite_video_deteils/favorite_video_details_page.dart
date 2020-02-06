@@ -12,4 +12,7 @@ class FavoriteVideoDetailsPage extends StatelessWidget {
       ),
     );
   }
+
+
+  
 }
