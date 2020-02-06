@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_navigation/pages/dashboard/dashboard_page.dart';
 import 'package:home_navigation/pages/home/home_page.dart';
 import 'package:home_navigation/pages/login/login_page.dart';
 import 'package:home_navigation/pages/not_found/not_found_page.dart';
@@ -17,6 +18,16 @@ abstract class Router {
   };
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    final List<String> pathElements = settings.name.split('/');
+    if (pathElements[0] != '') {
+      return null;
+    } else if (pathElements[1] == Routes.favoriteDetailsPath) {
+      return MaterialPageRoute(
+        builder: (context) {
+          return DashboardPage();
+        },
+      );
+    }
     return null;
   }
 
