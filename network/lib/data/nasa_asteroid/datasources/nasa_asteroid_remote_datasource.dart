@@ -11,6 +11,9 @@ abstract class NasaAsteroidRemoteDatasource {
 }
 
 class NasaAsteroidRemoteDatasourceImpl implements NasaAsteroidRemoteDatasource {
+  static const String NASA_DOMAIN = 'api.nasa.gov';
+  static const String NASA_PATH = 'neo/rest/v1/feed';
+  
   final NasaWsClient client;
 
   NasaAsteroidRemoteDatasourceImpl({@required this.client});
@@ -24,7 +27,7 @@ class NasaAsteroidRemoteDatasourceImpl implements NasaAsteroidRemoteDatasource {
   @override
   Future<List<Asteroid>> getAsteroidsNearEarch(
       {String startDate = '2019-12-05', String endDate = '2019-12-06'}) async {
-    Uri uri = Uri.https('api.nasa.gov', 'neo/rest/v1/feed', {
+    Uri uri = Uri.https(NASA_DOMAIN, NASA_PATH, {
       'start_date': startDate,
       'end_date': endDate,
       'api_key': 'DEMO_KEY',

@@ -3,7 +3,7 @@ import 'package:network/data/nasa_asteroid/models/asteroid.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'common/network/nasa_ws_client.dart';
-import 'data/nasa_asteroid/datasources/search_remote_datasource.dart';
+import 'data/nasa_asteroid/datasources/nasa_asteroid_remote_datasource.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -109,21 +109,21 @@ class _AsteroidPageState extends State<AsteroidPage> {
         title: Text('Asteroid Demo'),
       ),
       body: Container(
-        child: _buildAsteroidList(),
-        // child: FutureBuilder(
-        //   future:
-        //       nasaAsteroidRDS.getAsteroidsNearEarch(),
-        //   builder:
-        //       (BuildContext context, AsyncSnapshot<List<Asteroid>> snapshot) {
-        //     if (snapshot.connectionState == ConnectionState.done &&
-        //         !snapshot.hasError) {
-        //       _asteroidList = snapshot.data;
-        //       return _buildAsteroidList();
-        //     } else {
-        //       return _buildProgressBar();
-        //     }
-        //   },
-        // ),
+        //child: _buildAsteroidList(),
+        child: FutureBuilder(
+          future:
+              nasaAsteroidRDS.getAsteroidsNearEarch(),
+          builder:
+              (BuildContext context, AsyncSnapshot<List<Asteroid>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done &&
+                !snapshot.hasError) {
+              _asteroidList = snapshot.data;
+              return _buildAsteroidList();
+            } else {
+              return _buildProgressBar();
+            }
+          },
+        ),
       ),
     );
   }
