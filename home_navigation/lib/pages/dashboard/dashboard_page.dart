@@ -6,9 +6,14 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Text('DashboardPage'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Video'),
+      ),
+      body: Center(
+        child: Container(
+          child: Text('DashboardPage'),
+        ),
       ),
     );
   }
