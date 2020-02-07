@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:storage/common/network/nasa_ws_client.dart';
+import 'package:storage/data/database.dart' as db;
+import 'package:storage/data/nasa_asteroid/datasources/nasa_asteroid_local_datasource_moor_impl.dart';
 import 'package:storage/data/nasa_asteroid/datasources/nasa_asteroid_local_datasource_shared_preferencelocal_impl.dart';
 import 'package:storage/data/nasa_asteroid/datasources/nasa_asteroid_remote_datasource.dart';
 import 'package:storage/data/nasa_asteroid/models/asteroid.dart';
@@ -17,6 +19,7 @@ class AsteroidListPage extends StatefulWidget {
 
 class _AsteroidListPageState extends State<AsteroidListPage> {
   List<Asteroid> _asteroidList;
+  NasaAsteroidRepository repository;
 
   @override
   void initState() {
@@ -26,13 +29,17 @@ class _AsteroidListPageState extends State<AsteroidListPage> {
 
   Future<NasaAsteroidRepository> get nasaAsteroidRepository async =>
       NasaAsteroidRepositoryImpl(
+        nasaAsteroidNetworkDatasource: NasaAsteroidRemoteDatasourceImpl(
+          client: NasaWsClientImpl(http.Client()),
+        ),
         nasaAsteroidLocalDatasource:
             NasaAsteroidLocalDatasourceSharedPrefetenceImpl(
           sharedPreferences: await SharedPreferences.getInstance(),
         ),
-        nasaAsteroidNetworkDatasource: NasaAsteroidRemoteDatasourceImpl(
-          client: NasaWsClientImpl(http.Client()),
-        ),
+        // nasaAsteroidLocalDatasource:
+        //     NasaAsteroidLocalDatasourceMoorImpl(
+        //   database: db.AppDatabase(),
+        // ),
       );
 
   NasaAsteroidRemoteDatasource get nasaAsteroidRDS =>
@@ -110,7 +117,7 @@ class _AsteroidListPageState extends State<AsteroidListPage> {
         child: _buildAsteroidList(),
         // child: FutureBuilder(
         //   future:
-        //       nasaAsteroidRDS.getAsteroidsByDate('2019-12-06');
+        //       nasaAsteroidRepository.then((repository) => repository.getAsteroidsByDate('2019-12-06')),
         //   builder:
         //       (BuildContext context, AsyncSnapshot<List<Asteroid>> snapshot) {
         //     if (snapshot.connectionState == ConnectionState.done &&

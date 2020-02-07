@@ -19,10 +19,10 @@ class NasaAsteroidLocalDatasourceSharedPrefetenceImpl
     if (jsonString != null) {
       List<dynamic> rawList = jsonDecode(jsonString);
       List<Asteroid> asteroidList = rawList
-          .map((dynamic rawItem) =>
+          .map<Asteroid>((dynamic rawItem) =>
               Asteroid.fromJson(rawItem as Map<String, dynamic>))
-          .toList()
-          .cast<Asteroid>();
+          .toList();
+          //.cast<Asteroid>();
       return asteroidList;
     }
     return null;
@@ -34,9 +34,9 @@ class NasaAsteroidLocalDatasourceSharedPrefetenceImpl
       await sharedPreferences.remove('asteroid_cache_$date');
     } else {
       final rawList = asteroids
-          .map((Asteroid asteroid) => asteroid.toJson())
-          .toList()
-          .cast<Map<String, dynamic>>();
+          .map<Map<String, dynamic>>((Asteroid asteroid) => asteroid.toJson())
+          .toList();
+          //.cast<Map<String, dynamic>>();
       final json = jsonEncode(rawList);
       await sharedPreferences.setString('asteroid_cache_$date', json);
     }
