@@ -3,11 +3,10 @@ import 'package:storage/common/network/nasa_ws_client.dart';
 import 'package:storage/data/nasa_asteroid/models/asteroid.dart';
 import 'package:meta/meta.dart';
 
-import 'fake_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class NasaAsteroidRemoteDatasource {
-  Future<List<Asteroid>> getAsteroidsNearEarch();
+  Future<List<Asteroid>> getAsteroidsByDate(String date);
 }
 
 class NasaAsteroidRemoteDatasourceImpl implements NasaAsteroidRemoteDatasource {
@@ -22,8 +21,9 @@ class NasaAsteroidRemoteDatasourceImpl implements NasaAsteroidRemoteDatasource {
   }
 
   @override
-  Future<List<Asteroid>> getAsteroidsNearEarch(
-      {String startDate = '2019-12-05', String endDate = '2019-12-06'}) async {
+  Future<List<Asteroid>> getAsteroidsByDate(String date) async {
+    final startDate = date;
+    final endDate = date;
     Uri uri = Uri.https('api.nasa.gov', 'neo/rest/v1/feed', {
       'start_date': startDate,
       'end_date': endDate,
@@ -43,18 +43,18 @@ class NasaAsteroidRemoteDatasourceImpl implements NasaAsteroidRemoteDatasource {
   }
 }
 
-class NasaAsteroidRemoteDatasourceMock implements NasaAsteroidRemoteDatasource {
-  @override
-  Future<List<Asteroid>> getAsteroidsNearEarch() async {
-    String json = getFakeAsteroidResponse();
-    List<Asteroid> asteroids = [];
-    Map<String, dynamic> decodedJson = jsonDecode(json);
-    Map<String, dynamic> datesDecoded = decodedJson['near_earth_objects'];
-    datesDecoded.forEach((key, value) {
-      value.forEach((listItem) {
-        asteroids.add(Asteroid.fromJson(listItem as Map<String, dynamic>));
-      });
-    });
-    return asteroids;
-  }
-}
+// class NasaAsteroidRemoteDatasourceMock implements NasaAsteroidRemoteDatasource {
+//   @override
+//   Future<List<Asteroid>> getAsteroidsNearEarch() async {
+//     String json = getFakeAsteroidResponse();
+//     List<Asteroid> asteroids = [];
+//     Map<String, dynamic> decodedJson = jsonDecode(json);
+//     Map<String, dynamic> datesDecoded = decodedJson['near_earth_objects'];
+//     datesDecoded.forEach((key, value) {
+//       value.forEach((listItem) {
+//         asteroids.add(Asteroid.fromJson(listItem as Map<String, dynamic>));
+//       });
+//     });
+//     return asteroids;
+//   }
+// }
