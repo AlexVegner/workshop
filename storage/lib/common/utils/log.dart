@@ -26,7 +26,7 @@ class Log {
     Log._instance?.logger?.info(message, error, stackTrace);
   }
 
-  /// Send a INFO log message and log the exception.
+  /// Send a DEBUG log message and log the exception.
   static void d(message, [Object error, StackTrace stackTrace]) {
     Log._instance?.logger?.fine(message, error, stackTrace);
   }

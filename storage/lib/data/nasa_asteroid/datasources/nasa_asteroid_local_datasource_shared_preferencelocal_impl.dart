@@ -22,7 +22,7 @@ class NasaAsteroidLocalDatasourceSharedPrefetenceImpl
           .map<Asteroid>((dynamic rawItem) =>
               Asteroid.fromJson(rawItem as Map<String, dynamic>))
           .toList();
-          //.cast<Asteroid>();
+          // .cast<Asteroid>();
       return asteroidList;
     }
     return null;

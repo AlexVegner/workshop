@@ -16,20 +16,28 @@ class Asteroids extends Table {
 }
 
 @UseDao(tables: [Asteroids])
-class AsteroidsDao extends DatabaseAccessor<AppDatabase> with _$AsteroidsDaoMixin {
+class AsteroidsDao extends DatabaseAccessor<AppDatabase>
+    with _$AsteroidsDaoMixin {
   AsteroidsDao(AppDatabase db) : super(db);
 
   Future<List<Asteroid>> getAllAsteroids() => select(asteroids).get();
-  Future<List<Asteroid>> getAllAsteroidsByDate(String date) => (select(asteroids)..where((t) => t.date.equals(date))).get();
+  
+  Future<List<Asteroid>> getAllAsteroidsByDate(String date) =>
+      (select(asteroids)..where((t) => t.date.equals(date))).get();
 
   Stream<List<Asteroid>> watchAllAsteroids() => select(asteroids).watch();
 
-  Future insertAsteroid(Asteroid asteroid) => into(asteroids).insert(asteroid, orReplace: true);
-  Future insertAllAsteroids(List<Asteroid> asteroidList) => into(asteroids).insertAll(asteroidList, orReplace: true);
+  Future insertAsteroid(Asteroid asteroid) =>
+      into(asteroids).insert(asteroid, orReplace: true);
 
-  Future updateAsteroid(Asteroid asteroid) => update(asteroids).replace(asteroid);
+  Future insertAllAsteroids(List<Asteroid> asteroidList) =>
+      into(asteroids).insertAll(asteroidList, orReplace: true);
 
-  Future deleteAsteroid(Asteroid asteroid) => delete(asteroids).delete(asteroid);
+  Future updateAsteroid(Asteroid asteroid) =>
+      update(asteroids).replace(asteroid);
+
+  Future deleteAsteroid(Asteroid asteroid) =>
+      delete(asteroids).delete(asteroid);
 }
 
 @UseMoor(tables: [Asteroids], daos: [AsteroidsDao])

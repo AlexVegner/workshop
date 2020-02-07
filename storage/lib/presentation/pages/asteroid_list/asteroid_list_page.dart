@@ -21,7 +21,7 @@ class AsteroidListPage extends StatefulWidget {
 }
 
 class _AsteroidListPageState extends State<AsteroidListPage> {
-  String _selectedDate = '2020-01-11';
+  String _selectedDate = '2020-01-13';
   List<Asteroid> _asteroidList;
 
   @override
@@ -38,14 +38,14 @@ class _AsteroidListPageState extends State<AsteroidListPage> {
         networkCheck: NetworkCheckImpl(
           connectivity: Connectivity(),
         ),
-        nasaAsteroidLocalDatasource:
-            NasaAsteroidLocalDatasourceSharedPrefetenceImpl(
-          sharedPreferences: await SharedPreferences.getInstance(),
-        ),
         // nasaAsteroidLocalDatasource:
-        //     NasaAsteroidLocalDatasourceMoorImpl(
-        //   database: db.AppDatabase(),
+        //     NasaAsteroidLocalDatasourceSharedPrefetenceImpl(
+        //   sharedPreferences: await SharedPreferences.getInstance(),
         // ),
+        nasaAsteroidLocalDatasource:
+            NasaAsteroidLocalDatasourceMoorImpl(
+          database: db.AppDatabase(),
+        ),
       );
 
   NasaAsteroidRemoteDatasource get nasaAsteroidRDS =>
