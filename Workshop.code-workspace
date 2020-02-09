@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "home_navigation"
+		},
+		{
+			"path": "di_get_it"
 		}
 	],
 	"settings": {}
