@@ -23,12 +23,8 @@ class NasaAsteroidBloc extends Bloc<NasaAsteroidEvent, NasaAsteroidState> {
   Stream<NasaAsteroidState> mapEventToState(
     NasaAsteroidEvent event,
   ) async* {
-    if (event is NasaAsteroidLoadTodayEvent) {
-      final date = currentDateToString();
-      yield* _loadNasaAsteroidByDate(date);
-    } else if (event is NasaAsteroidLoadByDateEvent) {
-      yield* _loadNasaAsteroidByDate(event.date);
-    }
+    final date = currentDateToString();
+    yield* _loadNasaAsteroidByDate(date);
   }
 
   Stream<NasaAsteroidState> _loadNasaAsteroidByDate(String date) async* {

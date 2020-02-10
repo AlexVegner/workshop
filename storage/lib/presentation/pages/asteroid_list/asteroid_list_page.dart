@@ -30,6 +30,7 @@ class _AsteroidListPageState extends State<AsteroidListPage> {
     super.initState();
   }
 
+  
   Future<NasaAsteroidRepository> get nasaAsteroidRepository async =>
       NasaAsteroidRepositoryImpl(
         nasaAsteroidNetworkDatasource: NasaAsteroidRemoteDatasourceImpl(

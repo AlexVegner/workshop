@@ -64,13 +64,17 @@ abstract class Router {
   }
 
   static Widget _buildHomePage({HomePageOptions page}) {
-    return MultiBlocProvider(providers: [
-      BlocProvider<NasaAsteroidBloc>(
-        create: (BuildContext context) => getIt<NasaAsteroidBloc>(),
-      ),
-      BlocProvider<FavoriteAsteroidListBloc>(
-          create: (BuildContext context) => getIt<FavoriteAsteroidListBloc>()),
-    ], child: HomePage(page: page));
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NasaAsteroidBloc>(
+          create: (BuildContext context) => getIt<NasaAsteroidBloc>(),
+        ),
+        BlocProvider<FavoriteAsteroidListBloc>(
+          create: (BuildContext context) => getIt<FavoriteAsteroidListBloc>(),
+        ),
+      ],
+      child: HomePage(page: page),
+    );
   }
 
   static Route _buildDashboardRoute(RouteSettings settings) {
@@ -110,10 +114,10 @@ abstract class Router {
       initialEvent = FavoriteAsteroidDetailsGetByIdEvent(idInt);
     }
     return MaterialPageRoute(
-      builder: (context) =>
-          BlocProvider(
-            create: (BuildContext context) => getIt<FavoriteAsteroidDetailsBloc>()..add(initialEvent),
-            child: FavoriteAsteroidDetailsPage(id: id, asteroid: asteroid)),
+      builder: (context) => BlocProvider(
+          create: (BuildContext context) =>
+              getIt<FavoriteAsteroidDetailsBloc>()..add(initialEvent),
+          child: FavoriteAsteroidDetailsPage()),
     );
   }
 

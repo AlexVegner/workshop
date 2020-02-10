@@ -32,14 +32,14 @@ class GetFavoriteAsteroidByIdUsecase implements UseCase<FavoriteAsteroidEntity, 
 
 @lazySingleton
 @injectable
-class CreateFavoriteAsteroidUsecase implements UseCase<void, NoPayload> {
+class CreateFavoriteAsteroidUsecase implements UseCase<void, FavoriteAsteroidEntity> {
 final FavoriteAsteroidRepository favoriteAsteroidRepository;
 
   CreateFavoriteAsteroidUsecase({@required this.favoriteAsteroidRepository});
 
   @override
-  Future<void> call(NoPayload _) {
-    return favoriteAsteroidRepository.getAllAsteroids();
+  Future<void> call(FavoriteAsteroidEntity asteroid) async {
+    await favoriteAsteroidRepository.createAsteroid(asteroid);
   }
 }
 
