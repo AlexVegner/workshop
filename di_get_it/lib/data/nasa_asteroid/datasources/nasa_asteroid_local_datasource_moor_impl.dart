@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:storage/data/database.dart' as db;
+import 'package:storage/data/database/database.dart' as db;
 import 'package:storage/data/nasa_asteroid/datasources/nasa_asteroid_local_datasource.dart';
 import 'package:storage/data/nasa_asteroid/models/nasa_asteroid.dart';
 
@@ -27,7 +27,6 @@ class NasaAsteroidLocalDatasourceMoorImpl
           );
         })
         .toList();
-        //.cast<Asteroid>();
     return asteroidList;
   }
 
@@ -46,7 +45,6 @@ class NasaAsteroidLocalDatasourceMoorImpl
           );
         })
         .toList();
-        //.cast<db.Asteroid>();
     await database.nasaAsteroidsDao.insertAllAsteroids(asteroidDbList);
   }
 }

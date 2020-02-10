@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _selectedPageIndex = widget.page?.index ?? 1;
+    _selectedPageIndex = widget.page?.index ?? 0;
   }
 
   final List<Widget> _pages = [

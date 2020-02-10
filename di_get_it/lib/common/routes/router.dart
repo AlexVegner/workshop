@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:storage/common/routes/routes.dart';
 import 'package:storage/data/favorite_asteroid/models/favorite_asteroid.dart';
 import 'package:storage/domain/favorite_ateroid/entities/favorite_asteroid_entity.dart';
+import 'package:storage/presentation/favorite_asteroid_deteils/bloc/favorite_asteroid_details_bloc.dart';
 import 'package:storage/presentation/favorite_asteroid_deteils/favorite_asteroid_details_page.dart';
+import 'package:storage/presentation/favorite_asteroid_list/bloc/favorite_asteroid_list_bloc.dart';
 import 'package:storage/presentation/home/home_page.dart';
 import 'package:storage/presentation/nasa_asteroids/bloc/nasa_asteroid_bloc.dart';
 import 'package:storage/presentation/not_found/not_found_page.dart';
@@ -13,10 +15,7 @@ import 'package:storage/presentation/splash/splash_page.dart';
 import 'package:storage/common/config/injector.dart';
 
 abstract class Router {
-  ///   settings/profile/edit/?title=Matrix&year=2010
-  /// 
-
-  static Widget home = _buildHomePage();
+  static Widget home = _buildHomePage(page: HomePageOptions.serarch);
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -42,10 +41,10 @@ abstract class Router {
             uri.queryParameters[Routes.favoriteDetailsNewAsteroidParameter];
         final asteroidRaw = jsonDecode(asteroidJson);
         final asteroid = FavoriteAsteroid.fromJson(asteroidRaw);
-        _buildFavoriteDetailsRoute(settings, asteroid: asteroid);
+        return _buildFavoriteDetailsRoute(settings, asteroid: asteroid);
       } else {
         final id = pathElements[2];
-        _buildFavoriteDetailsRoute(settings, id: id);
+        return _buildFavoriteDetailsRoute(settings, id: id);
       }
     }
 
@@ -65,11 +64,14 @@ abstract class Router {
   }
 
   static Widget _buildHomePage({HomePageOptions page}) {
-    return BlocProvider(
-      create: (BuildContext context) => getIt<NasaAsteroidBloc>(),
-      child: HomePage(page: page));
+    return MultiBlocProvider(providers: [
+      BlocProvider<NasaAsteroidBloc>(
+        create: (BuildContext context) => getIt<NasaAsteroidBloc>(),
+      ),
+      BlocProvider<FavoriteAsteroidListBloc>(
+          create: (BuildContext context) => getIt<FavoriteAsteroidListBloc>()),
+    ], child: HomePage(page: page));
   }
-
 
   static Route _buildDashboardRoute(RouteSettings settings) {
     return MaterialPageRoute(
@@ -84,8 +86,7 @@ abstract class Router {
   }
 
   static Route _buildFavoriteRoute(RouteSettings settings) {
-    return 
-    MaterialPageRoute(
+    return MaterialPageRoute(
       builder: (context) => _buildHomePage(page: HomePageOptions.favorite),
     );
   }
@@ -101,9 +102,18 @@ abstract class Router {
     String id,
     FavoriteAsteroidEntity asteroid,
   }) {
+    var initialEvent;
+    if (asteroid != null) {
+      initialEvent = FavoriteAsteroidDetailsSetEvent(asteroid);
+    } else {
+      int idInt = int.parse(id);
+      initialEvent = FavoriteAsteroidDetailsGetByIdEvent(idInt);
+    }
     return MaterialPageRoute(
       builder: (context) =>
-          FavoriteAsteroidDetailsPage(id: id, asteroid: asteroid),
+          BlocProvider(
+            create: (BuildContext context) => getIt<FavoriteAsteroidDetailsBloc>()..add(initialEvent),
+            child: FavoriteAsteroidDetailsPage(id: id, asteroid: asteroid)),
     );
   }
 

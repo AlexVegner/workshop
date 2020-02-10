@@ -49,7 +49,6 @@ class FavoriteAsteroids extends Table {
   IntColumn get timestamp => integer().nullable()();
   RealColumn get distance => real().nullable()();
   TextColumn get detailsUrl => text().withLength(min: 1, max: 200)();
-  TextColumn get date => text().withLength(min: 1, max: 20)();
   TextColumn get note => text().withLength(min: 1, max: 20)();
   IntColumn get alertLevel => integer().nullable()();
 
@@ -63,6 +62,8 @@ class FavoriteAsteroidsDao extends DatabaseAccessor<AppDatabase>
   FavoriteAsteroidsDao(AppDatabase db) : super(db);
 
   Future<List<FavoriteAsteroid>> getAllAsteroids() => select(favoriteAsteroids).get();
+
+  Future<FavoriteAsteroid> getAsteroidById(int id) => (select(favoriteAsteroids)..where((t) => t.id.equals(id))).getSingle();
   
   Stream<List<FavoriteAsteroid>> watchAllAsteroids() => select(favoriteAsteroids).watch();
 
@@ -92,5 +93,5 @@ class AppDatabase extends _$AppDatabase {
         )));
 
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 7;
 }

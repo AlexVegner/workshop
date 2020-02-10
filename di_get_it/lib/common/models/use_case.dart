@@ -5,6 +5,11 @@ import 'package:equatable/equatable.dart';
 //   Stream<Either<Failure, Type>> call(Payload payload);
 // }
 
+abstract class UseCaseStream<State, Payload> {
+  Stream<State> call(Payload payload);
+}
+
+
 abstract class UseCase<Type, Payload> {
   Future<Type> call(Payload payload);
 }

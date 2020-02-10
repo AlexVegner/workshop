@@ -1,17 +1,8 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:storage/common/errors/no_connection_error.dart';
-import 'package:storage/common/network/nasa_ws_client.dart';
-import 'package:storage/common/network/network_check.dart';
-import 'package:storage/data/database.dart' as db;
-import 'package:storage/data/nasa_asteroid/datasources/nasa_asteroid_local_datasource_moor_impl.dart';
-import 'package:storage/data/nasa_asteroid/datasources/nasa_asteroid_remote_datasource.dart';
+import 'package:storage/common/routes/routes.dart';
 import 'package:storage/data/nasa_asteroid/models/nasa_asteroid.dart';
-import 'package:storage/data/nasa_asteroid/repositories/nasa_asteroid_repository.dart';
-import 'package:http/http.dart' as http;
-import 'package:storage/domain/nasa_asteroid/repository/nasa_asteroid_repository.dart';
+import 'package:storage/domain/nasa_asteroid/entities/nasa_asteroid_entity.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/nasa_asteroid_bloc.dart';
@@ -57,12 +48,16 @@ class _NasaAsteroidListPageState extends State<NasaAsteroidListPage> {
         ));
   }
 
-  _launchURL(String url) async {
+  void _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  void _showAsteroid(NasaAsteroidEntity asteroid) {
+    Navigator.of(context).pushNamed(Routes.createFavoriteDetails(asteroid));
   }
 
   Widget _buildAsteroidList() {
@@ -92,6 +87,7 @@ class _NasaAsteroidListPageState extends State<NasaAsteroidListPage> {
           title: Text(asteroid.name),
           subtitle: Text('Distance: ${asteroid.distance}'),
           onTap: () => _launchURL(asteroid.detailsUrl),
+          // onTap: () => _showAsteroid(asteroid),
         ),
       ),
     );

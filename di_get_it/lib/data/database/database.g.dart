@@ -335,7 +335,6 @@ class FavoriteAsteroid extends DataClass
   final int timestamp;
   final double distance;
   final String detailsUrl;
-  final String date;
   final String note;
   final int alertLevel;
   FavoriteAsteroid(
@@ -344,7 +343,6 @@ class FavoriteAsteroid extends DataClass
       this.timestamp,
       this.distance,
       @required this.detailsUrl,
-      @required this.date,
       @required this.note,
       this.alertLevel});
   factory FavoriteAsteroid.fromData(
@@ -363,7 +361,6 @@ class FavoriteAsteroid extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}distance']),
       detailsUrl: stringType
           .mapFromDatabaseResponse(data['${effectivePrefix}details_url']),
-      date: stringType.mapFromDatabaseResponse(data['${effectivePrefix}date']),
       note: stringType.mapFromDatabaseResponse(data['${effectivePrefix}note']),
       alertLevel: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}alert_level']),
@@ -378,7 +375,6 @@ class FavoriteAsteroid extends DataClass
       timestamp: serializer.fromJson<int>(json['timestamp']),
       distance: serializer.fromJson<double>(json['distance']),
       detailsUrl: serializer.fromJson<String>(json['detailsUrl']),
-      date: serializer.fromJson<String>(json['date']),
       note: serializer.fromJson<String>(json['note']),
       alertLevel: serializer.fromJson<int>(json['alertLevel']),
     );
@@ -392,7 +388,6 @@ class FavoriteAsteroid extends DataClass
       'timestamp': serializer.toJson<int>(timestamp),
       'distance': serializer.toJson<double>(distance),
       'detailsUrl': serializer.toJson<String>(detailsUrl),
-      'date': serializer.toJson<String>(date),
       'note': serializer.toJson<String>(note),
       'alertLevel': serializer.toJson<int>(alertLevel),
     };
@@ -412,7 +407,6 @@ class FavoriteAsteroid extends DataClass
       detailsUrl: detailsUrl == null && nullToAbsent
           ? const Value.absent()
           : Value(detailsUrl),
-      date: date == null && nullToAbsent ? const Value.absent() : Value(date),
       note: note == null && nullToAbsent ? const Value.absent() : Value(note),
       alertLevel: alertLevel == null && nullToAbsent
           ? const Value.absent()
@@ -426,7 +420,6 @@ class FavoriteAsteroid extends DataClass
           int timestamp,
           double distance,
           String detailsUrl,
-          String date,
           String note,
           int alertLevel}) =>
       FavoriteAsteroid(
@@ -435,7 +428,6 @@ class FavoriteAsteroid extends DataClass
         timestamp: timestamp ?? this.timestamp,
         distance: distance ?? this.distance,
         detailsUrl: detailsUrl ?? this.detailsUrl,
-        date: date ?? this.date,
         note: note ?? this.note,
         alertLevel: alertLevel ?? this.alertLevel,
       );
@@ -447,7 +439,6 @@ class FavoriteAsteroid extends DataClass
           ..write('timestamp: $timestamp, ')
           ..write('distance: $distance, ')
           ..write('detailsUrl: $detailsUrl, ')
-          ..write('date: $date, ')
           ..write('note: $note, ')
           ..write('alertLevel: $alertLevel')
           ..write(')'))
@@ -463,10 +454,8 @@ class FavoriteAsteroid extends DataClass
               timestamp.hashCode,
               $mrjc(
                   distance.hashCode,
-                  $mrjc(
-                      detailsUrl.hashCode,
-                      $mrjc(date.hashCode,
-                          $mrjc(note.hashCode, alertLevel.hashCode))))))));
+                  $mrjc(detailsUrl.hashCode,
+                      $mrjc(note.hashCode, alertLevel.hashCode)))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -476,7 +465,6 @@ class FavoriteAsteroid extends DataClass
           other.timestamp == this.timestamp &&
           other.distance == this.distance &&
           other.detailsUrl == this.detailsUrl &&
-          other.date == this.date &&
           other.note == this.note &&
           other.alertLevel == this.alertLevel);
 }
@@ -487,7 +475,6 @@ class FavoriteAsteroidsCompanion extends UpdateCompanion<FavoriteAsteroid> {
   final Value<int> timestamp;
   final Value<double> distance;
   final Value<String> detailsUrl;
-  final Value<String> date;
   final Value<String> note;
   final Value<int> alertLevel;
   const FavoriteAsteroidsCompanion({
@@ -496,7 +483,6 @@ class FavoriteAsteroidsCompanion extends UpdateCompanion<FavoriteAsteroid> {
     this.timestamp = const Value.absent(),
     this.distance = const Value.absent(),
     this.detailsUrl = const Value.absent(),
-    this.date = const Value.absent(),
     this.note = const Value.absent(),
     this.alertLevel = const Value.absent(),
   });
@@ -506,13 +492,11 @@ class FavoriteAsteroidsCompanion extends UpdateCompanion<FavoriteAsteroid> {
     this.timestamp = const Value.absent(),
     this.distance = const Value.absent(),
     @required String detailsUrl,
-    @required String date,
     @required String note,
     this.alertLevel = const Value.absent(),
   })  : id = Value(id),
         name = Value(name),
         detailsUrl = Value(detailsUrl),
-        date = Value(date),
         note = Value(note);
   FavoriteAsteroidsCompanion copyWith(
       {Value<int> id,
@@ -520,7 +504,6 @@ class FavoriteAsteroidsCompanion extends UpdateCompanion<FavoriteAsteroid> {
       Value<int> timestamp,
       Value<double> distance,
       Value<String> detailsUrl,
-      Value<String> date,
       Value<String> note,
       Value<int> alertLevel}) {
     return FavoriteAsteroidsCompanion(
@@ -529,7 +512,6 @@ class FavoriteAsteroidsCompanion extends UpdateCompanion<FavoriteAsteroid> {
       timestamp: timestamp ?? this.timestamp,
       distance: distance ?? this.distance,
       detailsUrl: detailsUrl ?? this.detailsUrl,
-      date: date ?? this.date,
       note: note ?? this.note,
       alertLevel: alertLevel ?? this.alertLevel,
     );
@@ -595,15 +577,6 @@ class $FavoriteAsteroidsTable extends FavoriteAsteroids
         minTextLength: 1, maxTextLength: 200);
   }
 
-  final VerificationMeta _dateMeta = const VerificationMeta('date');
-  GeneratedTextColumn _date;
-  @override
-  GeneratedTextColumn get date => _date ??= _constructDate();
-  GeneratedTextColumn _constructDate() {
-    return GeneratedTextColumn('date', $tableName, false,
-        minTextLength: 1, maxTextLength: 20);
-  }
-
   final VerificationMeta _noteMeta = const VerificationMeta('note');
   GeneratedTextColumn _note;
   @override
@@ -627,7 +600,7 @@ class $FavoriteAsteroidsTable extends FavoriteAsteroids
 
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, timestamp, distance, detailsUrl, date, note, alertLevel];
+      [id, name, timestamp, distance, detailsUrl, note, alertLevel];
   @override
   $FavoriteAsteroidsTable get asDslTable => this;
   @override
@@ -662,12 +635,6 @@ class $FavoriteAsteroidsTable extends FavoriteAsteroids
           detailsUrl.isAcceptableValue(d.detailsUrl.value, _detailsUrlMeta));
     } else if (isInserting) {
       context.missing(_detailsUrlMeta);
-    }
-    if (d.date.present) {
-      context.handle(
-          _dateMeta, date.isAcceptableValue(d.date.value, _dateMeta));
-    } else if (isInserting) {
-      context.missing(_dateMeta);
     }
     if (d.note.present) {
       context.handle(
@@ -707,9 +674,6 @@ class $FavoriteAsteroidsTable extends FavoriteAsteroids
     }
     if (d.detailsUrl.present) {
       map['details_url'] = Variable<String, StringType>(d.detailsUrl.value);
-    }
-    if (d.date.present) {
-      map['date'] = Variable<String, StringType>(d.date.value);
     }
     if (d.note.present) {
       map['note'] = Variable<String, StringType>(d.note.value);
