@@ -1,4 +1,4 @@
-name: storage
+name: flutter_flavors
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -14,64 +14,20 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  bloc: ^3.0.0
-  flutter_bloc: ^3.2.0
-  provider: ^4.0.1
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
-  http: ^0.12.0+4
-  equatable: ^0.6.1
-  url_launcher: ^5.4.1
-  logging: ^0.11.4
-
-  connectivity: ^0.4.6+2
-
-  shared_preferences: ^0.5.6+1
-
-  moor_flutter: ^2.1.0
-  # For the UI
-  flutter_slidable: ^0.5.3
-
-  path: ^1.6.4
-  date_format: ^1.0.8
-
-  # add injectable to your dependencies
-  injectable: ^0.1.0
-  # add get_it
-  get_it: ^3.1.0
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  test: 
-  mockito: ^4.1.1
-  bloc_test: ^3.0.0
-  
-  build_runner:
-  injectable_generator: ^0.1.0
-  # moor_generator: ^2.3.1 //analyzer_plugin issue
-  moor_generator:
 
-dependency_overrides:
-  moor_generator:
-    git:
-      url: https://github.com/simolus3/moor.git
-      ref: beta
-      path: moor_generator
-  sqlparser:
-    git:
-      url: https://github.com/simolus3/moor.git
-      ref: beta
-      path: sqlparser
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

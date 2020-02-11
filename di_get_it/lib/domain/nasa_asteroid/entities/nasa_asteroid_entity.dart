@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-class NasaAsteroidEntity {
+class NasaAsteroidEntity with EquatableMixin {
   final int id;
   final String name;
   final int timestamp;
@@ -30,4 +31,7 @@ class NasaAsteroidEntity {
         distance: distance ?? this.distance,
         detailsUrl: detailsUrl ?? this.detailsUrl,
       );
+
+  @override
+  List<Object> get props => [id, name, detailsUrl, distance, timestamp];
 }

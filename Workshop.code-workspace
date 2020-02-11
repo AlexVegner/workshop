@@ -22,6 +22,9 @@
 			"path": "di_get_it"
 		},
 		{
+			"path": "flutter_flavors"
+		},
+		{
 			"path": "test_widgets"
 		}
 	],
