@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:storage/common/utils/date_utils.dart';
@@ -17,14 +18,19 @@ class NasaAsteroidBloc extends Bloc<NasaAsteroidEvent, NasaAsteroidState> {
   NasaAsteroidBloc({@required this.getNasaAsteroidUsecase});
 
   @override
-  NasaAsteroidState get initialState => NasaAsteroidInitialState();
+  NasaAsteroidState get initialState => const NasaAsteroidInitialState();
 
   @override
   Stream<NasaAsteroidState> mapEventToState(
     NasaAsteroidEvent event,
   ) async* {
-    final date = currentDateToString();
-    yield* _loadNasaAsteroidByDate(date);
+    if (event is NasaAsteroidLoadTodayEvent) {
+      final date = currentDateToString();
+
+      yield* _loadNasaAsteroidByDate(date);
+    } else if (event is NasaAsteroidLoadByDateEvent) {
+      yield* _loadNasaAsteroidByDate(event.date);
+    }
   }
 
   Stream<NasaAsteroidState> _loadNasaAsteroidByDate(String date) async* {

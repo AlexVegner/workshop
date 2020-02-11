@@ -4,20 +4,19 @@ import 'package:meta/meta.dart';
 import 'package:storage/domain/nasa_asteroid/entities/nasa_asteroid_entity.dart';
 
 class NasaAsteroid extends NasaAsteroidEntity {
-
   NasaAsteroid({
     @required int id,
     @required String name,
     @required int timestamp,
     @required double distance,
     @required String detailsUrl,
-  }): super(
-    id: id,
-    name: name,
-    timestamp: timestamp,
-    distance: distance,
-    detailsUrl: detailsUrl,
-  );
+  }) : super(
+          id: id,
+          name: name,
+          timestamp: timestamp,
+          distance: distance,
+          detailsUrl: detailsUrl,
+        );
 
   factory NasaAsteroid.fromNeoJson(Map<String, dynamic> json) {
     final closeApproachData = json['close_approach_data'] as List<dynamic>;
