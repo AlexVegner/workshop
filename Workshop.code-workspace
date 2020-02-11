@@ -20,6 +20,9 @@
 		},
 		{
 			"path": "di_get_it"
+		},
+		{
+			"path": "test_widgets"
 		}
 	],
 	"settings": {}

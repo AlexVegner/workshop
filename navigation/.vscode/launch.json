@@ -5,9 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flutter Navigation",
+            "name": "Run Widget Test",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "template": "run-test",
         }
     ]
 }
