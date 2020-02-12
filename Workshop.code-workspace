@@ -26,6 +26,9 @@
 		},
 		{
 			"path": "test_widgets"
+		},
+		{
+			"path": "rx_dart_samples"
 		}
 	],
 	"settings": {}
